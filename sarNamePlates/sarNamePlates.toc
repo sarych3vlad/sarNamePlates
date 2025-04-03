@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: |cff009cffsar|rNamePlates
+## Notes: sport version wotlk 335
+## Author: Сарыч
+## Version: 1
+
+configID.lua
+core.lua
