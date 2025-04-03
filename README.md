@@ -82,5 +82,3 @@ https://github.com/FrostAtom/awesome_wotlk
 
 - highlight — опционально
 
----
-  Работает — хорошо. Не нравится — правь сам.
