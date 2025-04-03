@@ -72,8 +72,7 @@ https://github.com/FrostAtom/awesome_wotlk
 
 Добавляется в `configID.lua`:
 
-### lua
-[12345] = { type = "cc", priority = 1, highlight = 3 } -- Example Spell
+`[12345] = { type = "cc", priority = 1, highlight = 3 } -- Example Spell`
 
 - type — что это за эффект
 
@@ -81,4 +80,5 @@ https://github.com/FrostAtom/awesome_wotlk
 
 - highlight — опционально
 
+###
   Работает — хорошо. Не нравится — правь сам.
