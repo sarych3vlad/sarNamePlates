@@ -558,46 +558,6 @@ cleanupFrame:SetScript("OnUpdate", function(self, elapsed)
     end
 end)
 
--------
--- Плавные неймплейты
--------
---[[local ActiveNameplates = {}
-local DEFAULT_ALPHA = 0.5
-local TARGET_ALPHA = 1.0
-
-local function SmoothAlpha(plate, targetAlpha, duration)
-    if not plate then return end
-
-    local startAlpha = plate:GetAlpha()
-    local timeElapsed = 0
-
-    plate:SetScript("OnUpdate", function(self, elapsed)
-        timeElapsed = timeElapsed + elapsed
-        local progress = math.min(timeElapsed / duration, 1)
-
-        local newAlpha = startAlpha + (targetAlpha - startAlpha) * progress
-        plate:SetAlpha(newAlpha)
-
-        if progress == 1 then
-            plate:SetScript("OnUpdate", nil)
-        end
-    end)
-end
-
-_G["ActiveNameplates"] = _G["ActiveNameplates"] or {}
-
-local function OnNamePlateAdded_Alpha(self, event, unitId)
-	local plate = C_NamePlate.GetNamePlateForUnit(unitId)
-    if plate then
-        ActiveNameplates[unitId] = plate
-        local playerHasTarget = UnitExists("target")
-        local targetAlpha = (playerHasTarget and not UnitIsUnit(unitId, "target")) and DEFAULT_ALPHA or TARGET_ALPHA
-
-        plate:SetAlpha(0)
-        SmoothAlpha(plate, targetAlpha, 0.4)
-    end
-end
-
 local f = CreateFrame("Frame")
 f:RegisterEvent("NAME_PLATE_UNIT_ADDED")
 f:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
@@ -606,26 +566,6 @@ f:RegisterEvent("UNIT_AURA")
 f:SetScript("OnEvent", function(self, event, unitId)
     if event == "NAME_PLATE_UNIT_ADDED" then
         OnNamePlateAdded_Auras(unitId)
-        OnNamePlateAdded_Alpha(self, event, unitId)
-    elseif event == "UNIT_AURA" then
-        OnUnitAura(unitId)
-    elseif event == "NAME_PLATE_UNIT_REMOVED" then
-        OnNamePlateRemoved(unitId)
-    end
-end)]]
-
---тест
--- Оставляем создание фрейма
-local f = CreateFrame("Frame")
-f:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-f:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-f:RegisterEvent("UNIT_AURA")
-
--- Убираем плавную альфу и просто вызываем нужные функции
-f:SetScript("OnEvent", function(self, event, unitId)
-    if event == "NAME_PLATE_UNIT_ADDED" then
-        OnNamePlateAdded_Auras(unitId)
-        -- Удалено: OnNamePlateAdded_Alpha
     elseif event == "UNIT_AURA" then
         OnUnitAura(unitId)
     elseif event == "NAME_PLATE_UNIT_REMOVED" then
